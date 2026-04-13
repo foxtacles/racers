@@ -88,7 +88,6 @@ set(COMMON_SOURCES
 # --- GolDP.dll target ---
 add_library(goldp SHARED
   GolDP/src/goldrawdpstate.cpp
-  GolDP/src/adapter.cpp
   GolDP/src/goldpexport.cpp
   GolDP/src/goldrawstate.cpp
   GolDP/src/golcommondrawstate.cpp
@@ -96,6 +95,7 @@ add_library(goldp SHARED
   util/decomp.cpp
   ${COMMON_SOURCES}
 )
+target_compile_definitions(goldp PRIVATE BUILDING_GOL)
 reccmp_add_target(goldp ID GOLDP)
 
 if (MSVC)
@@ -144,6 +144,7 @@ add_executable(legoracers WIN32
   util/decomp.cpp
   ${COMMON_SOURCES}
 )
+target_compile_definitions(legoracers PRIVATE BUILDING_LEGORACERS)
 reccmp_add_target(legoracers ID LEGORACERS)
 
 target_include_directories(legoracers PRIVATE
@@ -159,12 +160,13 @@ target_link_libraries(legoracers PRIVATE
   ole32
   winmm
 )
-add_dependencies(legoracers goldp)
 
 set_property(TARGET legoracers PROPERTY OUTPUT_NAME "LEGORacers")
 set_property(TARGET legoracers PROPERTY SUFFIX ".exe")
 
 set_property(SOURCE LEGORacers/racers.rc APPEND PROPERTY OBJECT_DEPENDS "${PROJECT_SOURCE_DIR}/LEGORacers/resources/racers.ico")
+
+add_custom_target(game DEPENDS legoracers goldp)
 
 # --- Modern compiler compatibility ---
 if (MSVC)
