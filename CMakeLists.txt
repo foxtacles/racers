@@ -88,9 +88,10 @@ set(COMMON_SOURCES
 
 # --- GolDP.dll target ---
 add_library(goldp SHARED
+  GolDP/src/goldrawstate.cpp
   GolDP/src/goldrawdpstate.cpp
   GolDP/src/goldpexport.cpp
-  GolDP/src/goldrawstate.cpp
+  GolDP/src/goldevicelist.cpp
   GolDP/src/golcommondrawstate.cpp
   GolDP/src/main.cpp
   util/decomp.cpp
@@ -111,6 +112,7 @@ target_include_directories(goldp PRIVATE
 )
 target_link_libraries(goldp PRIVATE
     ddraw
+    dxguid
 )
 
 set_property(TARGET goldp PROPERTY OUTPUT_NAME "GolDP")
@@ -195,7 +197,8 @@ if (MSVC_FOR_DECOMP)
     target_link_options(goldp PRIVATE "/OPT:NOREF,ICF")
   endif()
 
-  set_property(TARGET legoracers goldp PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+  set_property(TARGET legoracers PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+  set_property(TARGET goldp PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
   set(CMAKE_CXX_FLAGS "/W3 /GX /D \"WIN32\" /D \"_WINDOWS\"")
   set(CMAKE_CXX_FLAGS_DEBUG "/Gm /Zi /Od /D \"_DEBUG\"")
