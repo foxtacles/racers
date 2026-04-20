@@ -188,6 +188,7 @@ target_include_directories(legoracers PRIVATE
 
 target_link_libraries(legoracers PRIVATE
   dinput
+  dsound
   ole32
   strmiids
   winmm
