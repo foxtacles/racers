@@ -697,6 +697,10 @@ if (MSVC_FOR_DECOMP)
     common/src/golmateriallibrary.cpp
     PROPERTIES COMPILE_OPTIONS "/Ob1"
   )
+  # Keep this rasterizer contribution unpackaged, including its distinct empty entry.
+  # VC6 /O2 enables /Gy; /Od resets it before restoring the other optimizations.
+  set_property(SOURCE GolDP/src/render/golrasterizers2.cpp APPEND PROPERTY
+    COMPILE_OPTIONS "/Od;/Og;/Oi;/Ot;/Oy;/Ob2;/Gs;/Gf")
 
   # These flags have been taken from the defaults for a Visual C++ 6.0 project (the compiler the
   # game was originally built with) and tweaked slightly to produce more debugging info for reccmp.

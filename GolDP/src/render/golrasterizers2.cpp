@@ -309,16 +309,9 @@ void FUN_1004a6d0(
 
 #else
 
-// STUB: GOLDP 0x10041a50
-void FUN_10041a50(
-	GolSoftwareRenderer* p_renderer,
-	D3DTLVERTEX* p_vertex0,
-	D3DTLVERTEX* p_vertex1,
-	D3DTLVERTEX* p_vertex2
-)
+// FUNCTION: GOLDP 0x10041a50
+void FUN_10041a50(GolSoftwareRenderer*, D3DTLVERTEX*, D3DTLVERTEX*, D3DTLVERTEX*)
 {
-	// empty function; cannot get the folding right
-	STUB(0x10041a50);
 }
 
 // FUNCTION: GOLDP 0x10041a60
